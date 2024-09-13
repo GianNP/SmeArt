@@ -462,6 +462,10 @@ footer i {
     color: var(--color-green);
 }
 
+.alert_message.lg {
+    text-align: center;
+}
+
 form {
     display: flex;
     flex-direction: column;
