@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +16,7 @@
     <nav>
         <div class="container nav__container">
             <div class="nav__logo">
-                <h1 href="index.php">SmeArt</h1>
+                <h1>SmeArt</h1>
             </div>
             <ul class="nav__items">
                 <li><a href="blog.php">Blog</a></li>
@@ -30,8 +29,8 @@
                         <img src="img/assets/avatar0.jpg">
                     </div>
                     <ul>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="logout.html">Logout</a></li>
+                        <li><a href="/SmeArt/admin/dashboard.php">Dashboard</a></li>
+                        <li><a href="logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -40,7 +39,6 @@
             <button id="close__nav-btn"><i class="uil uil-multiply"></i></button>
         </div>
     </nav>
-
     <!-- End Navbar -->
 
     <header class="category_title">
