@@ -24,18 +24,19 @@ require 'config/database.php';
                 <h1>SmeArt</h1>
             </div>
             <ul class="nav__items">
-                <li><a href="blog.php">Blog</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="services.php">Services</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <!-- <li><a href="login.php">Login</a></li> -->
+                <li><a href=" <?= ROOT_URL ?> blog.php">Blog</a></li>
+                <li><a href=" <?= ROOT_URL ?> about.php">About</a></li>
+                <li><a href=" <?= ROOT_URL ?> services.php">Services</a></li>
+                <li><a href=" <?= ROOT_URL ?> contact.php">Contact</a></li>
+                <!-- <li><a href=" <?= ROOT_URL ?> login.php">Login</a></li> -->
                 <li class="nav__profile">
                     <div class="avatar">
                         <img src="img/assets/avatar0.jpg">
                     </div>
                     <ul>
-                        <li><a href="/SmeArt/admin/dashboard.php">Dashboard</a></li>
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href=" <?= ROOT_URL ?> 
+                        /SmeArt/admin/dashboard.php">Dashboard</a></li>
+                        <li><a href=" <?= ROOT_URL ?> logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>
