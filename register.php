@@ -1,3 +1,8 @@
+<?php 
+require 'config/constans.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,11 +76,13 @@
 <div class="signup-container">
     <img src="img/logo.png" alt="Instagram Logo" width="180px">
     <h2>Daftar untuk melihat apa yang terjadi di SMAKANZA.</h2>
-    <form action="#" method="post" enctype="multipart.form-data">
-        <input type="email" name="email" placeholder="Mobile Number atau Email" required>
-        <input type="text" name="fullname" placeholder="Nama lengkap" required>
+    <form action="<?ROOT_URL?>register-logic.php" method="post" enctype="multipart.form-data">
+        <input type="text" name="firstname" placeholder="Nama Depan" required>
+        <input type="text" name="lastname" placeholder="Nama Belakang" required>
         <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Mobile Number atau Email" required>
         <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="password" placeholder="Confirm Password" required>
         <button type="submit">Daftar</button>
     </form>
     <div class="login-link">Sudah punya akun?<a href="login.php">Log in</a>
