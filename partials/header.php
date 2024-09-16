@@ -10,7 +10,7 @@ require 'config/database.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beranda | SmeArt</title>
     <!-- CSS -->
-     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="<?= ROOT_URL ?>style.css">
     <!-- Iconscout -->
      <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
      <!-- Poppins Font -->
@@ -21,22 +21,21 @@ require 'config/database.php';
     <nav>
         <div class="container nav__container">
             <div class="nav__logo">
-                <h1>SmeArt</h1>
+                <h1><a href="" style="color: azure;">SmeArt</a></h1>
             </div>
             <ul class="nav__items">
-                <li><a href=" <?= ROOT_URL ?> blog.php">Blog</a></li>
-                <li><a href=" <?= ROOT_URL ?> about.php">About</a></li>
-                <li><a href=" <?= ROOT_URL ?> services.php">Services</a></li>
-                <li><a href=" <?= ROOT_URL ?> contact.php">Contact</a></li>
+                <li><a href="<?= ROOT_URL ?>blog.php">Blog</a></li>
+                <li><a href="<?= ROOT_URL ?>about.php">About</a></li>
+                <li><a href="<?= ROOT_URL ?>services.php">Services</a></li>
+                <li><a href="<?= ROOT_URL ?>contact.php">Contact</a></li>
                 <!-- <li><a href=" <?= ROOT_URL ?> login.php">Login</a></li> -->
                 <li class="nav__profile">
                     <div class="avatar">
                         <img src="img/assets/avatar0.jpg">
                     </div>
                     <ul>
-                        <li><a href=" <?= ROOT_URL ?> 
-                        /SmeArt/admin/dashboard.php">Dashboard</a></li>
-                        <li><a href=" <?= ROOT_URL ?> logout.php">Logout</a></li>
+                        <li><a href="<?= ROOT_URL ?>admin/dashboard.php">Dashboard</a></li>
+                        <li><a href="<?= ROOT_URL ?>logout.php">Logout</a></li>
                     </ul>
                 </li>
             </ul>

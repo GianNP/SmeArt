@@ -173,16 +173,17 @@ nav button {
 }
 
 .nav__profile ul li a {
-    padding: 1rem;
+    padding: 1.5rem;
     background: var(--color-gray-900);
     display: block;
     width: 100%;
 }
 
 .nav__profile ul li:last-child a {
-    width: 122px; 
+    padding: 1.5rem;
     background: var(--color-red);
-    color: var(--color-bg);
+    display: block;
+    width: 100%;
 }
 
 /* Category Button */

@@ -1,2 +1,2 @@
 <?php
-define('ROOT_URL', 'http://localhost/smeart/');
+define('ROOT_URL', 'http://localhost/smeArt/');
