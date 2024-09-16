@@ -1,3 +1,8 @@
+<?php
+require 'config/constants.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +34,7 @@
             color: #8e8e8e;
             margin-bottom: 20px;
         }
-        input[type="text"], input[type="email"], input[type="password"] {
+        input[type="text"], input[type="email"], input[type="password"], input[type="file"] {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
@@ -71,12 +76,16 @@
 <div class="signup-container">
     <img src="img/logo.png" alt="Instagram Logo" width="180px">
     <h2>Daftar untuk melihat apa yang terjadi di SMAKANZA.</h2>
-    <form action="#" method="post" enctype="multipart.form-data">
-        <input type="email" name="email" placeholder="Mobile Number atau Email" required>
-        <input type="text" name="fullname" placeholder="Nama lengkap" required>
+    <form action="signup-logic.php" method="post" enctype="multipart/form-data">
+    <input type="text" name="firstname" placeholder="Nama Depan" required>
+        <input type="text" name="lastname" placeholder="Nama Belakang" required>
         <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Daftar</button>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="createpassword" placeholder="Create Password" required>
+        <input type="password" name="confirmpassword" placeholder="Confirm Password" required>
+        <label for="avatar" style="display: block; margin-top: 8px; color: #8e8e8e; text-align: left;">Avatar User</label>
+        <input type="file" id="avatar" name="avatar">
+        <button type="submit" name="submit">Daftar</button>
     </form>
     <div class="login-link">Sudah punya akun?<a href="login.php">Log in</a>
     </div>
