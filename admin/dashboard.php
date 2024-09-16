@@ -84,19 +84,19 @@
                         <tr>
                             <td>Lorem ipsum dolor sit amet consectetur.</td>
                             <td>Art</td>
-                            <td><a href="edit-users.php" class="btn sm">Edit</a></td>
+                            <td><a href="edit-post.php" class="btn sm">Edit</a></td>
                             <td><a href="delete-users.php" class="btn sm danger">Delete</a></td>
                         </tr>
                         <tr>
                             <td>Lorem ipsum dolor sit amet consectetur.</td>
                             <td>Music</td>
-                            <td><a href="edit-users.php" class="btn sm">Edit</a></td>
+                            <td><a href="edit-post.php" class="btn sm">Edit</a></td>
                             <td><a href="delete-users.php" class="btn sm danger">Delete</a></td>
                         </tr>
                         <tr>
                             <td>Lorem ipsum dolor sit amet consectetur.</td>
                             <td>Wild</td>
-                            <td><a href="edit-users.php" class="btn sm">Edit</a></td>
+                            <td><a href="edit-post.php" class="btn sm">Edit</a></td>
                             <td><a href="delete-users.php" class="btn sm danger">Delete</a></td>
                         </tr>
                     </tbody>

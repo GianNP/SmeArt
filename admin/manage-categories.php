@@ -17,7 +17,7 @@
     <nav>
         <div class="container nav__container">
             <div class="nav__logo">
-                <h1 href="index.php">SmeArt</h1>
+                <h1><a href="../index.php" style="color: azure;">SmeArt</a></h1>
             </div>
             <ul class="nav__items">
                 <li><a href="../blog.php">Blog</a></li>
@@ -104,3 +104,4 @@
 <?php
 include '../partials/footer.php';
 ?>
+<script src="../js/main.js"></script>

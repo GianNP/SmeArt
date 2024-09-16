@@ -20,7 +20,7 @@ require 'config/database.php';
     <nav>
         <div class="container nav__container">
             <div class="nav__logo">
-                <h1><a href="" style="color: azure;">SmeArt</a></h1>
+                <h1><a href="index.php" style="color: azure;">SmeArt</a></h1>
             </div>
             <ul class="nav__items">
                 <li><a href="<?= ROOT_URL ?>blog.php">Blog</a></li>

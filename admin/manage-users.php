@@ -17,7 +17,7 @@
     <nav>
         <div class="container nav__container">
             <div class="nav__logo">
-                <h1 href="index.php">SmeArt</h1>
+            <h1><a href="index.php" style="color: azure;">SmeArt</a></h1>
             </div>
             <ul class="nav__items">
                 <li><a href="../blog.php">Blog</a></li>
@@ -85,21 +85,21 @@
                         <tr>
                             <td>Giant Naufal</td>
                             <td>giantnp</td>
-                            <td><a href="edit-users.php" class="btn sm">Edit</a></td>
+                            <td><a href="edit-user.php" class="btn sm">Edit</a></td>
                             <td><a href="delete-users.php" class="btn sm danger">Delete</a></td>
                             <td>Yes</td>
                         </tr>
                         <tr>
                             <td>Aquillo Aurele</td>
                             <td>ellotzy</td>
-                            <td><a href="edit-users.php" class="btn sm">Edit</a></td>
+                            <td><a href="edit-user.php" class="btn sm">Edit</a></td>
                             <td><a href="delete-users.php" class="btn sm danger">Delete</a></td>
                             <td>No</td>
                         </tr>
                         <tr>
                             <td>Fawwaz Abhinaya</td>
                             <td>armroyong</td>
-                            <td><a href="edit-users.php" class="btn sm">Edit</a></td>
+                            <td><a href="edit-user.php" class="btn sm">Edit</a></td>
                             <td><a href="delete-users.php" class="btn sm danger">Delete</a></td>
                             <td>No</td>
                         </tr>
