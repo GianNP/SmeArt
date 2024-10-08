@@ -76,7 +76,7 @@ require 'admin/config/constants.php';
 <div class="signup-container">
     <img src="img/logo.png" alt="Instagram Logo" width="180px">
     <h2>Daftar untuk melihat apa yang terjadi di SMAKANZA.</h2>
-    <form action="<?= ROOT_URL ?>signup-logic.php" enctype="multipart/form-data" method="post">
+    <form action="<?= ROOT_URL ?>signup-logic.php" enctype="multipart/form-data" method="POST">
     <input type="text" name="firstname" placeholder="Nama Depan" required>
         <input type="text" name="lastname" placeholder="Nama Belakang" required>
         <input type="text" name="username" placeholder="Username" required>
