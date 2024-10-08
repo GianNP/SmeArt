@@ -1,5 +1,5 @@
 <?php
-require 'config/constants.php';
+require 'admin/config/constants.php';
 
 ?>
 
@@ -76,7 +76,7 @@ require 'config/constants.php';
 <div class="signup-container">
     <img src="img/logo.png" alt="Instagram Logo" width="180px">
     <h2>Daftar untuk melihat apa yang terjadi di SMAKANZA.</h2>
-    <form action="signup-logic.php" method="post" enctype="multipart/form-data">
+    <form action="<?= ROOT_URL ?>signup-logic.php" method="post" enctype="multipart/form-data">
     <input type="text" name="firstname" placeholder="Nama Depan" required>
         <input type="text" name="lastname" placeholder="Nama Belakang" required>
         <input type="text" name="username" placeholder="Username" required>
