@@ -1,6 +1,6 @@
 <?php
+session_start(); // Start session to use $_SESSION
 require 'admin/config/constants.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ require 'admin/config/constants.php';
             margin: 0;
         }
         .signup-container {
-            background-color: #F0F8FF ;
+            background-color: #F0F8FF;
             border: 1px solid #dbdbdb;
             padding: 20px;
             width: 350px;
@@ -69,15 +69,34 @@ require 'admin/config/constants.php';
         .login-link a:hover {
             text-decoration: underline;
         }
+        .notification {
+            background-color: #ffcccb;
+            color: red;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid red;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
 
 <div class="signup-container">
-    <img src="img/logo.png" alt="Instagram Logo" width="180px">
+    <img src="img/logo.png" alt="SmeArt Logo" width="180px">
     <h2>Daftar untuk melihat apa yang terjadi di SMAKANZA.</h2>
+
+    <!-- Display notification if there's an error -->
+    <?php if (isset($_SESSION['signup'])): ?>
+        <div class="notification">
+            <p>
+                <?= $_SESSION['signup']; ?>
+                <?php unset($_SESSION['signup']); // Clear the session message ?>
+            </p>
+        </div>
+    <?php endif; ?>
+
     <form action="<?= ROOT_URL ?>signup-logic.php" enctype="multipart/form-data" method="POST">
-    <input type="text" name="firstname" placeholder="Nama Depan" required>
+        <input type="text" name="firstname" placeholder="Nama Depan" required>
         <input type="text" name="lastname" placeholder="Nama Belakang" required>
         <input type="text" name="username" placeholder="Username" required>
         <input type="email" name="email" placeholder="Email" required>
@@ -87,8 +106,7 @@ require 'admin/config/constants.php';
         <input type="file" id="avatar" name="avatar">
         <button type="submit" name="submit">Daftar</button>
     </form>
-    <div class="login-link">Sudah punya akun?<a href="login.php">Log in</a>
-    </div>
+    <div class="login-link">Sudah punya akun? <a href="login.php">Log in</a></div>
 </div>
 
 </body>
