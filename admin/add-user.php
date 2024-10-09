@@ -1,10 +1,14 @@
+<?php
+require 'admin/config/database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beranda | SmeArt</title>
-    <!-- CSS -->
+    <!-- CSS --> 
      <link rel="stylesheet" href="../style.css">
     <!-- Iconscout -->
      <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
@@ -50,7 +54,7 @@
         <div class="alert_message error">
             <p>This in an error message</p>
         </div>
-        <form action="#" method="post" enctype="multipart.form-data">
+        <form action="add-user-logic.php" method="post" enctype="multipart.form-data">
         <input type="email" name="email" placeholder="Mobile Number atau Email" required>
         <input type="text" name="fullname" placeholder="Nama lengkap" required>
         <input type="text" name="username" placeholder="Username" required>

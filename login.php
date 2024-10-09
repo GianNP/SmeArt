@@ -48,6 +48,14 @@
         button:hover {
             background-color: #0084d1;
         }
+        .error-notification {
+            background-color: #ffcccb;
+            color: red;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid red;
+            border-radius: 5px;
+        }
         .or {
             display: flex;
             align-items: center;
@@ -84,10 +92,19 @@
 
 <div class="login-container">
     <img src="img/logo.png" alt="Instagram Logo">
-    <form action="#" method="post">
-        <input type="text" placeholder="Username atau Email" required>
-        <input type="password" placeholder="Password" required>
-        <button type="submit">Log In</button>
+    
+    <!-- Tampilkan notifikasi jika ada error -->
+    <?php if (isset($_SESSION['login'])): ?>
+        <div class="error-notification">
+            <?= $_SESSION['login']; ?>
+            <?php unset($_SESSION['login']); // Hapus notifikasi setelah ditampilkan ?>
+        </div>
+    <?php endif; ?>
+
+    <form action="login-logic.php" method="post">
+        <input type="text" name="username_or_email" placeholder="Username atau Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" name="submit">Log In</button>
     </form>
     <div class="or">
         <span>ATAU</span>
