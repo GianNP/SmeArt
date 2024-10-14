@@ -1,5 +1,5 @@
 <?php
-require 'config.php'; // Memanggil koneksi database
+require 'admin/config/database.php'; // Memanggil koneksi database
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Mengambil dan memvalidasi input
