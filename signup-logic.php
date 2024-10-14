@@ -15,19 +15,19 @@ if (isset($_POST['submit'])) {
 
     // Validasi input dari form
     if (!$firstname) {
-        $_SESSION['signup'] = "Mohon masukkan Nama Depan"; // Cek jika Nama Depan kosong
-    } else if  (!$lastname) {
-        $_SESSION['signup'] = "Mohon masukkan Nama Belakang"; // Cek jika Nama Belakang kosong
-    } else if  (!$username) {
-        $_SESSION['signup'] = "Mohon masukkan Username"; // Cek jika Username kosong
-    } else if  (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['signup'] = "Mohon masukkan Email yang Valid"; // Cek jika Email tidak valid
-    } else if  (strlen($createpassword) < 8 || strlen($confirmpassword) < 8) {
-        $_SESSION['signup'] = "Mohon isi Password dengan 8 karakter minimal!"; // Cek jika Password kurang dari 8 karakter
+        $_SESSION['signup'] = "Mohon masukkan Nama Depan"; // Error jika Nama Depan kosong
+    } else if (!$lastname) {
+        $_SESSION['signup'] = "Mohon masukkan Nama Belakang"; // Error jika Nama Belakang kosong
+    } else if (!$username) {
+        $_SESSION['signup'] = "Mohon masukkan Username"; // Error jika Username kosong
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['signup'] = "Mohon masukkan Email yang Valid"; // Error jika Email tidak valid
+    } else if (strlen($createpassword) < 8 || strlen($confirmpassword) < 8) {
+        $_SESSION['signup'] = "Password harus minimal 8 karakter"; // Error jika Password kurang dari 8 karakter
     } else if ($createpassword !== $confirmpassword) {
-        $_SESSION['signup'] = "Password tidak sama"; // Cek jika Password dan Confirm Password tidak sama
+        $_SESSION['signup'] = "Password dan Confirm Password tidak sama"; // Error jika Password dan Confirm Password tidak sama
     } else if ($avatar['error'] !== UPLOAD_ERR_OK) {
-        $_SESSION['signup'] = "Tolong tambahkan Avatar anda"; // Cek jika file Avatar belum diupload
+        $_SESSION['signup'] = "Mohon tambahkan Avatar anda"; // Error jika avatar belum di-upload
     } else {
         // Cek apakah username atau email sudah ada di database
         $user_check_query = "SELECT * FROM users WHERE username= ? OR email= ?";
@@ -37,33 +37,33 @@ if (isset($_POST['submit'])) {
         $user_check_result = mysqli_stmt_get_result($stmt);
         
         if (mysqli_num_rows($user_check_result) > 0) {
-            $_SESSION['signup'] = "Username atau Email sudah terdaftar"; // Jika username atau email sudah ada
+            $_SESSION['signup'] = "Username atau Email sudah terdaftar"; // Error jika username atau email sudah terdaftar
         } else {
             // Hash password untuk keamanan
             $hashed_password = password_hash($createpassword, PASSWORD_DEFAULT);
 
-            // Siapkan upload avatar
-            $time = time(); // Mendapatkan timestamp saat ini
-            $avatar_name = $time . '_' . $avatar['name']; // Menambahkan timestamp pada nama file avatar untuk mencegah duplikasi
+            // Proses upload avatar
+            $time = time(); 
+            $avatar_name = $time . '_' . $avatar['name'];
             $avatar_tmp_name = $avatar['tmp_name'];
-            $avatar_destination_path = 'img/' . $avatar_name; // Path tempat menyimpan avatar
+            $avatar_destination_path = 'img/' . $avatar_name;
 
             // Jenis file yang diizinkan
             $allowed_files = ['png', 'jpg', 'jpeg', 'heic'];
-            $extension = pathinfo($avatar_name, PATHINFO_EXTENSION); // Mengambil ekstensi file menggunakan pathinfo
+            $extension = pathinfo($avatar_name, PATHINFO_EXTENSION);
 
-            // Validasi ekstensi file dan ukuran file
+            // Validasi format dan ukuran file avatar
             if (in_array(strtolower($extension), $allowed_files)) {
-                if ($avatar['size'] < 10000000) { // Batasan ukuran 10MB
-                    move_uploaded_file($avatar_tmp_name, $avatar_destination_path); // Pindahkan file avatar ke folder yang sudah ditentukan
+                if ($avatar['size'] < 10000000) { 
+                    move_uploaded_file($avatar_tmp_name, $avatar_destination_path); 
                 } else {
-                    $_SESSION['signup'] = 'Ukuran file melebihi 10MB'; // Jika ukuran file lebih dari 1MB
+                    $_SESSION['signup'] = 'Ukuran file melebihi 10MB'; // Error jika file lebih dari 10MB
                 }
             } else {
-                $_SESSION['signup'] = 'Format file tidak valid'; // Jika format file tidak sesuai
+                $_SESSION['signup'] = 'Format file tidak valid'; // Error jika format file tidak sesuai
             }
 
-            // Masukkan data user baru ke database jika tidak ada error
+            // Insert data user ke database jika semua validasi berhasil
             if (!isset($_SESSION['signup'])) {
                 $insert_user_query = "INSERT INTO users (firstname, lastname, username, email, password, avatar, is_admin) 
                                       VALUES (?, ?, ?, ?, ?, ?, 0)";
@@ -72,25 +72,25 @@ if (isset($_POST['submit'])) {
                 $insert_user_result = mysqli_stmt_execute($stmt);
 
                 if (!mysqli_stmt_errno($stmt)) {
-                    // Jika registrasi berhasil
+                    // Sukses membuat user
                     $_SESSION['signup-success'] = "Registrasi Berhasil, mohon Log In!";
-                    header('Location: ' . ROOT_URL . 'login.php'); // Arahkan ke halaman login
+                    header('Location: ' . ROOT_URL . 'login.php');
                     die();
                 } else {
-                    $_SESSION['signup'] = "Ada kesalahan, mohon coba lagi."; // Jika terjadi error pada proses penyimpanan database
+                    $_SESSION['signup'] = "Ada kesalahan, mohon coba lagi."; // Error pada proses penyimpanan database
                 }
             }
         }
     }
 
-    // Arahkan kembali ke halaman registrasi jika ada error
+    // Redirect ke halaman registrasi jika terjadi error
     if (isset($_SESSION['signup'])) {
         header('Location: ' . ROOT_URL . 'register.php');
         die();
     }
 
 } else {
-    // Arahkan ke halaman registrasi jika form tidak di-submit
+    // Redirect ke halaman registrasi jika form tidak di-submit
     header('Location: ' . ROOT_URL . 'register.php');
     die();
 }

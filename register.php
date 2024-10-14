@@ -85,15 +85,24 @@ require 'admin/config/constants.php';
     <img src="img/logo.png" alt="SmeArt Logo" width="180px">
     <h2>Daftar untuk melihat apa yang terjadi di SMAKANZA.</h2>
 
-    <!-- Display notification if there's an error -->
     <?php if (isset($_SESSION['signup'])): ?>
-        <div class="notification">
+    <div class="notification">
+        <p>
+            <?= $_SESSION['signup']; ?>
+            <?php unset($_SESSION['signup']); // Hapus pesan error setelah ditampilkan ?>
+        </p>
+    </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['signup-success'])): ?>
+        <div class="notification" style="background-color: #c6ffdd; color: green; border: 1px solid green;">
             <p>
-                <?= $_SESSION['signup']; ?>
-                <?php unset($_SESSION['signup']); // Clear the session message ?>
+                <?= $_SESSION['signup-success']; ?>
+                <?php unset($_SESSION['signup-success']); // Hapus pesan sukses setelah ditampilkan ?>
             </p>
         </div>
     <?php endif; ?>
+
 
     <form action="<?= ROOT_URL ?>signup-logic.php" enctype="multipart/form-data" method="POST">
         <input type="text" name="firstname" placeholder="Nama Depan" required>
@@ -111,3 +120,4 @@ require 'admin/config/constants.php';
 
 </body>
 </html>
+ 

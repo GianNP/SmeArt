@@ -1,5 +1,5 @@
 <?php
-require 'admin/config/database.php';
+require 'partials/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +27,6 @@ require 'admin/config/database.php';
                 <li><a href="../about.php">About</a></li>
                 <li><a href="../services.php">Services</a></li>
                 <li><a href="../contact.php">Contact</a></li>
-                <!-- <li><a href="login.php">Login</a></li> -->
                 <li class="nav__profile">
                     <div class="avatar">
                         <img src="../img/assets/avatar0.jpg">
@@ -45,35 +44,34 @@ require 'admin/config/database.php';
     </nav>
     <!-- End Navbar -->
 
-</head>
-<body>
-    
+    <!-- Form Add User -->
     <section class="form_section">
         <div class="container form_section-container">
             <h1>Add User</h1>
-        <div class="alert_message error">
-            <p>This in an error message</p>
+            <div class="alert_message error">
+                <p>This is an error message</p>
+            </div>
+            <form action="<? ROOT_URL ?>add-user-logic.php" method="post" enctype="multipart/form-data">
+                <input type="email" name="email" placeholder="Mobile Number atau Email" required>
+                <input type="text" name="fullname" placeholder="Nama lengkap" required>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <label style="color: white;" for="role">User Role</label>
+                <select name="role" id="role">
+                    <option value="0">Author</option>
+                    <option value="1">Admin</option>
+                </select>
+                <div class="form_control">
+                    <label style="color: white;" for="avatar">User Avatar</label>
+                    <input type="file" id="avatar" name="avatar">
+                </div>
+                <button class="btn" type="submit">Add User</button>
+            </form>
         </div>
-        <form action="add-user-logic.php" method="post" enctype="multipart.form-data">
-        <input type="email" name="email" placeholder="Mobile Number atau Email" required>
-        <input type="text" name="fullname" placeholder="Nama lengkap" required>
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <label style="color: white;" for="role">User Role</label>
-        <select>
-            <option value="0">Author</option>
-            <option value="1">Admin</option>
-        </select>
-        <div class="form_control">
-            <label style="color: white;" for="avatar">User Avatar</label>
-            <input type="file" id="avatar">
-        </div>
-        <button class="btn" type="submit">Add User</button>
-    </form>
     </section>
-        </div>
+    <!-- End Form Add User -->
 
-<footer>
+    <footer>
         <div class="footer__socials">
             <a href="#" target="_blank"><i class="uil uil-youtube"></i></a>
             <a href="#" target="_blank"><i class="uil uil-facebook-f"></i></a>
@@ -82,18 +80,18 @@ require 'admin/config/database.php';
             <a href="#" target="_blank"><i class="uil uil-twitter"></i></a>
         </div>
         <div class="container footer__container">
-        <article>
-            <h4>Kategori</h4>
-            <ul>
-                <li><a href="">Art</a></li>
-                <li><a href="">Wild Life</a></li>
-                <li><a href="">Travel</a></li>
-                <li><a href="">Music</a></li>
-                <li><a href="">Science $ Technology</a></li>
-                <li><a href="">Food</a></li>
-            </ul>
-        </article>
-        <article>
+            <article>
+                <h4>Kategori</h4>
+                <ul>
+                    <li><a href="">Art</a></li>
+                    <li><a href="">Wild Life</a></li>
+                    <li><a href="">Travel</a></li>
+                    <li><a href="">Music</a></li>
+                    <li><a href="">Science & Technology</a></li>
+                    <li><a href="">Food</a></li>
+                </ul>
+            </article>
+            <article>
                 <h4>Support</h4>
                 <ul>
                     <li><a href="">Online Support</a></li>

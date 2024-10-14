@@ -1,6 +1,6 @@
 <?php
 session_start(); // Memulai sesi untuk menggunakan $_SESSION
-require 'config/database.php'; // Memanggil file koneksi ke database
+require 'admin/config/database.php'; // Memanggil file koneksi ke database
 
 // Memeriksa apakah form login disubmit
 if (isset($_POST['submit'])) {
@@ -30,14 +30,17 @@ if (isset($_POST['submit'])) {
                 // Set session untuk pengguna yang login
                 $_SESSION['user_id'] = $user['id']; // Menyimpan ID pengguna
                 $_SESSION['user_name'] = $user['username']; // Menyimpan username
-                $_SESSION['login-success'] = "Login berhasil, selamat datang " . $user['firstname'] . "!"; // Pesan sukses
+                $_SESSION['login-success'] = "Login berhasil, Selamat Datang " . $user['firstname'] . "!"; // Pesan sukses
+                
+                session_write_close(); // Tutup session sebelum redirect
                 header('Location: ' . ROOT_URL . 'index.php'); // Arahkan ke halaman utama setelah login
                 die(); // Menghentikan eksekusi
             } else {
                 $_SESSION['login'] = "Password salah"; // Jika password tidak cocok
+                session_write_close(); // Tutup session sebelum redirect
+                header('Location: ' . ROOT_URL . 'login.php');
+                die();
             }
-        } else {
-            $_SESSION['login'] = "Pengguna tidak ditemukan"; // Jika pengguna tidak ada
         }
     }
 

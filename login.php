@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>  
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,11 +97,18 @@
 <div class="login-container">
     <img src="img/logo.png" alt="Instagram Logo">
     
-    <!-- Tampilkan notifikasi jika ada error -->
+    <!-- Tampilkan notifikasi jika ada error atau pesan sukses -->
     <?php if (isset($_SESSION['login'])): ?>
         <div class="error-notification">
             <?= $_SESSION['login']; ?>
             <?php unset($_SESSION['login']); // Hapus notifikasi setelah ditampilkan ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['login-success'])): ?>
+        <div class="success-notification" style="background-color: #ccffcc; color: green; padding: 10px; margin-bottom: 20px; border: 1px solid green; border-radius: 5px;">
+            <?= $_SESSION['login-success']; ?>
+            <?php unset($_SESSION['login-success']); // Hapus notifikasi setelah ditampilkan ?>
         </div>
     <?php endif; ?>
 
@@ -110,10 +121,8 @@
         <span>ATAU</span>
     </div>
     <a href="register.php">Belum punya akun? Daftar</a>
-    <div style="margin-top: 20px;">
-        <a href="#">Lupa password?</a>
-    </div>
 </div>
+
 
 </body>
 </html>
