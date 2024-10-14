@@ -42,7 +42,7 @@
             padding: 10px;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
+            cursor: pointer; 
             font-weight: bold;
         }
         button:hover {

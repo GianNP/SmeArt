@@ -1,3 +1,7 @@
+<?php
+include 'partials/header.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,21 +54,21 @@
         <div class="alert_message error">
             <p>This in an error message</p>
         </div>
-        <form action="#" method="post" enctype="multipart.form-data">
-        <input type="email" name="email" placeholder="Mobile Number atau Email" required>
-        <input type="text" name="fullname" placeholder="Nama lengkap" required>
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <form action="<? ROOT_URL ?>add-user-logic.php" method="post" enctype="multipart.form-data">
+            <input type="text" name="fullname" placeholder="Nama lengkap" required>
+            <input type="email" name="email" placeholder="Mobile Number atau Email" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
         <label style="color: white;" for="role">User Role</label>
-        <select>
+        <select name="userrole">
             <option value="0">Author</option>
             <option value="1">Admin</option>
         </select>
         <div class="form_control">
             <label style="color: white;" for="avatar">User Avatar</label>
-            <input type="file" id="avatar">
+            <input type="file" id="avatar" name="avatar">
         </div>
-        <button class="btn" type="submit">Add User</button>
+        <button class="btn" type="submit" name="submit">Add User</button>
     </form>
     </section>
         </div>
