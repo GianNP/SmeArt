@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beranda | SmeArt</title>
+    <title>Add Category | SmeArt</title>
     <!-- CSS -->
-     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- Iconscout -->
-     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-     <!-- Poppins Font -->
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
@@ -23,7 +23,6 @@
                 <li><a href="about.php">About</a></li>
                 <li><a href="services.php">Services</a></li>
                 <li><a href="contact.php">Contact</a></li>
-                <!-- <li><a href="login.php">Login</a></li> -->
                 <li class="nav__profile">
                     <div class="avatar">
                         <img src="../img/assets/avatar0.jpg">
@@ -34,31 +33,29 @@
                     </ul>
                 </li>
             </ul>
-
             <button id="open__nav-btn"><i class="uil uil-bars"></i></button>
             <button id="close__nav-btn"><i class="uil uil-multiply"></i></button>
         </div>
     </nav>
     <!-- End Navbar -->
 
-</head>
-<body>
-    
     <section class="form_section">
         <div class="container form_section-container">
             <h1>Add Category</h1>
-        <div class="alert_message error">
-            <p>This in an error message</p>
+            <?php if (isset($_SESSION['message'])): ?>
+                <div class="alert_message error">
+                    <p><?php echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
+                </div>
+            <?php endif; ?>
+            <form action="add-category.php" method="POST">
+                <input class="placeholder" type="text" name="title" placeholder="Title">
+                <textarea class="placeholder" rows="4" name="description" placeholder="Description"></textarea>
+                <button type="submit" class="btn" name="submit">Add Category</button>
+            </form>
         </div>
-        <form action="">
-            <input class="placeholder" type="text" placeholder="Title">
-            <textarea class="placeholder" rows="4" placeholder="Description"></textarea>
-            <button type="submit" class="btn">Add Category</button>
-        </form>
     </section>
-        </div>
 
-<footer>
+    <footer>
         <div class="footer__socials">
             <a href="#" target="_blank"><i class="uil uil-youtube"></i></a>
             <a href="#" target="_blank"><i class="uil uil-facebook-f"></i></a>
@@ -67,18 +64,18 @@
             <a href="#" target="_blank"><i class="uil uil-twitter"></i></a>
         </div>
         <div class="container footer__container">
-        <article>
-            <h4>Kategori</h4>
-            <ul>
-                <li><a href="">Art</a></li>
-                <li><a href="">Wild Life</a></li>
-                <li><a href="">Travel</a></li>
-                <li><a href="">Music</a></li>
-                <li><a href="">Science $ Technology</a></li>
-                <li><a href="">Food</a></li>
-            </ul>
-        </article>
-        <article>
+            <article>
+                <h4>Kategori</h4>
+                <ul>
+                    <li><a href="">Art</a></li>
+                    <li><a href="">Wild Life</a></li>
+                    <li><a href="">Travel</a></li>
+                    <li><a href="">Music</a></li>
+                    <li><a href="">Science & Technology</a></li>
+                    <li><a href="">Food</a></li>
+                </ul>
+            </article>
+            <article>
                 <h4>Support</h4>
                 <ul>
                     <li><a href="">Online Support</a></li>
@@ -99,7 +96,7 @@
                 </ul>
             </article>
             <article>
-                <h4>Kategori</h4>
+                <h4>Menu</h4>
                 <ul>
                     <li><a href="">Home</a></li>
                     <li><a href="">Blog</a></li>

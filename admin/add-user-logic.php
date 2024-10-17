@@ -1,13 +1,24 @@
 <?php
 require 'admin/config/database.php'; // Memanggil koneksi database
 
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Mengambil dan memvalidasi input
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
-    $fullname = filter_var(trim($_POST['fullname']), FILTER_SANITIZE_STRING);
+    $firstname = filter_var(trim($_POST['firstname']), FILTER_SANITIZE_STRING);
+    $lastname = filter_var(trim($_POST['lastname']), FILTER_SANITIZE_STRING);
+    $fullname = $firstname . ' ' . $lastname; // Menggabungkan nama depan dan belakang
     $username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING);
     $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Menghash password
     $role = $_POST['role'];
+
+    // Validasi input kosong
+    if (empty($email) || empty($firstname) || empty($lastname) || empty($username) || empty($password)) {
+        $errorMessage = "Semua field wajib diisi.";
+        include 'add-user.php';  // Redirect ke form dengan pesan error
+        exit;
+    }
 
     // Validasi file upload
     $avatar = $_FILES['avatar'];
@@ -17,6 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Cek jenis file
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         if (in_array($avatar['type'], $allowedTypes)) {
+            // Cek ukuran file (maksimal 500KB)
+            if ($avatar['size'] > 500000) {
+                die("Ukuran file terlalu besar. Maksimal 500KB.");
+            }
+
             $avatarPath = 'uploads/' . basename($avatar['name']);
             move_uploaded_file($avatar['tmp_name'], $avatarPath); // Pindahkan file ke folder uploads
         } else {
@@ -29,7 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare("INSERT INTO users (email, fullname, username, password, role, avatar) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$email, $fullname, $username, $password, $role, $avatarPath]);
 
-        // Redirect atau tampilkan pesan sukses
+        // Redirect dengan pesan sukses
+        $_SESSION['success'] = 'Pengguna berhasil ditambahkan!';
         header("Location: success-page.php"); // Ganti dengan halaman sukses yang Anda inginkan
         exit;
 
@@ -39,4 +56,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     die("Invalid request method.");
 }
-?>

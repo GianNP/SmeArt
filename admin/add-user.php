@@ -9,11 +9,11 @@ require 'partials/header.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beranda | SmeArt</title>
     <!-- CSS --> 
-     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- Iconscout -->
-     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-     <!-- Poppins Font -->
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
@@ -48,23 +48,32 @@ require 'partials/header.php';
     <section class="form_section">
         <div class="container form_section-container">
             <h1>Add User</h1>
-            <div class="alert_message error">
-                <p>This is an error message</p>
-            </div>
-            <form action="<? ROOT_URL ?>add-user-logic.php" method="post" enctype="multipart/form-data">
+            
+            <!-- Error Message Conditional -->
+            <?php if (isset($errorMessage)): ?>
+                <div class="alert_message error">
+                    <p><?php echo $errorMessage; ?></p>
+                </div>
+            <?php endif; ?>
+            
+            <form action="<?php echo ROOT_URL; ?>admin/add-user-logic.php" method="post" enctype="multipart/form-data">
+            <input type="text" name="firstname" placeholder="Nama depan" required>
+                <input type="text" name="lastname" placeholder="Nama belakang" required>
                 <input type="email" name="email" placeholder="Mobile Number atau Email" required>
-                <input type="text" name="fullname" placeholder="Nama lengkap" required>
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
+                
                 <label style="color: white;" for="role">User Role</label>
                 <select name="role" id="role">
                     <option value="0">Author</option>
                     <option value="1">Admin</option>
                 </select>
+                
                 <div class="form_control">
                     <label style="color: white;" for="avatar">User Avatar</label>
-                    <input type="file" id="avatar" name="avatar">
+                    <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png, .gif">
                 </div>
+                
                 <button class="btn" type="submit">Add User</button>
             </form>
         </div>
