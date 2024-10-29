@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 include "partials/header.php";
 if(!isset($_SESSION['user_is_admin'])){
     header("location: " . ROOT_URL . "logout.php");
@@ -64,6 +65,30 @@ unset($_SESSION['add-user-data']);
             <div class="form__control">
                 <label for="avatar">User Avatar</label>
                 <input type="file" name ='avatar' id="avatar">
+=======
+include 'partials/header.php'
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda | SmeArt</title>
+    <!-- CSS -->
+     <link rel="stylesheet" href="../style.css">
+    <!-- Iconscout -->
+     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+     <!-- Poppins Font -->
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="container nav__container">
+            <div class="nav__logo">
+                <h1>SmeArt</h1>
+>>>>>>> df0652c7625ef398702bc0c16b572b205dbf29b0
             </div>
             <button type="submit" name='submit' class="btn">Add User</button>
         </form>
@@ -71,6 +96,36 @@ unset($_SESSION['add-user-data']);
 </section>
 
 
+<<<<<<< HEAD
+=======
+</head>
+<body>
+    
+    <section class="form_section">
+        <div class="container form_section-container">
+            <h1>Add User</h1>
+        <div class="alert_message error">
+            <p>This in an error message</p>
+        </div>
+        <form action="<? ROOT_URL ?>add-user-logic.php" method="post" enctype="multipart.form-data">
+            <input type="text" name="fullname" placeholder="Nama lengkap" required>
+            <input type="email" name="email" placeholder="Mobile Number atau Email" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+        <label style="color: white;" for="role">User Role</label>
+        <select name="userrole">
+            <option value="0">Author</option>
+            <option value="1">Admin</option>
+        </select>
+        <div class="form_control">
+            <label style="color: white;" for="avatar">User Avatar</label>
+            <input type="file" id="avatar" name="avatar">
+        </div>
+        <button class="btn" type="submit" name="submit">Add User</button>
+    </form>
+    </section>
+        </div>
+>>>>>>> df0652c7625ef398702bc0c16b572b205dbf29b0
 
 
 
