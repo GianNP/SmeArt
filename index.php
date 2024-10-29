@@ -1,261 +1,131 @@
-<?php
+<?php 
 include 'partials/header.php';
+
+//featured
+$featured_query="SELECT * FROM posts WHERE is_featured=1";
+$featured_result=mysqli_query($connection,$featured_query);
+$featured=mysqli_fetch_assoc($featured_result);
+
+//fetch 9post
+
+
+$query="SELECT * FROM posts WHERE is_featured=0 ORDER BY date_time DESC LIMIT 9";
+$posts=mysqli_query($connection,$query);
+
+
 ?>
 
-    <!-- Features -->
-     <section class="featured">
-        <div class="container featured__container">
+
+    <?php if (mysqli_num_rows($featured_result) == 1 ) :  ?>
+    <section class="featured" >
+        <div class ="container featured__container">            
             <div class="post__thumbnail">
-                <img src="img/assets/blog3.jpg">
+                <img src="./images/<?= $featured['thumbnail'] ?>">
             </div>
             <div class="post__info">
-                <a href="category-posts.php" class="category__button">Wild Life</a>
-                <h2 class="post__title"><a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a></h2>
+                <?php
+                //fetch category
+                $category_id=$featured['category_id'];
+                $category_query="SELECT * FROM categories WHERE id=$category_id";
+                $category_result=mysqli_query($connection,$category_query);
+                $category=mysqli_fetch_assoc($category_result); 
+
+                $author_id=$featured['author_id'];
+                $author_query="SELECT * FROM users WHERE id=$author_id";
+                $author_result=mysqli_query($connection,$author_query);
+                $author=mysqli_fetch_assoc($author_result);
+                            
+                ?>
+                <a href="category-posts.php?id=<?= $category_id ?>" class="category__button"><?=$category['title']?></a>
+                <h2 class="post__title"><a href="post.php?id=<?=$featured['id']?>"><?=$featured['title']?></a></h2>
                 <p class="post__body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    <?= substr(html_entity_decode($featured['body']), 0, 300) ?>...
                 </p>
-                <div class="post__author">
-                    <div class="post__author-avatar">
-                        <img src="img/assets/avatar2.jpg">
-                    </div>
+                <div class="post__author-avatar">
+                <img src="./images/<?= $author['avatar'] ?>">
+                </div>
+                
                     <div class="post__author-info">
-                        <h5>By : Aquillo Voldemort</h5>
-                        <small>27 Agustus, 2024 - 10:00</small>
+                        <h5>By: <?= "{$author['firstname']} {$author['lastname']}" ?></h5>
+                        <small>
+                            <?=date("M d, Y -H:i" , strtotime($featured['date_time']))?>
+                        </small>
                     </div>
                 </div>
-            </div>
-        </div>  
-     </section>
-     <!-- Features End -->
-
-
-     <section class="posts">
-        <div class="container posts__container">
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog2.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar3.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog3.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar4.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog4.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar5.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog5.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar6.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog6.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar8.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog7.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar9.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog8.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar10.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog9.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar11.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="posts">
-                <div class="post__thumbnail">
-                    <img src="img/assets/blog10.jpg">
-                </div>
-                <div class="post__info">
-                    <a href="category-posts.php" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.php">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</a>
-                    </h3>    
-                    <p class="post__body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="img/assets/avatar12.jpg">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By : Cahya Eleonore</h5>
-                            <small>27 Agustus, 2024 - 10:00</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-     </section>
-     <!-- End Post -->
-
-     <!-- Category -->
-    <section class="category__buttons">
-        <div class="container category__buttons-container">
-            <a href="" class="category__button">Art</a>
-            <a href="" class="category__button">Wild Life</a>
-            <a href="" class="category__button">Travel</a>
-            <a href="" class="category__button">Science & Technology</a>
-            <a href="" class="category__button">Food</a>
-            <a href="" class="category__button">Music</a>
         </div>
     </section>
-    <!-- End Category -->
+    <?php endif ?> 
+    <!-- ===================END OF FEATURED================-->
 
-     <?php
-        include 'partials/footer.php'
-     ?>
+<!-- #region POSTS -->
+
+<section class="posts <?= $featured ? '' : 'section__extra-margin' ?>">
+  <div class="container posts__container">
+    <?php while ($post = mysqli_fetch_assoc($posts)) : ?>
+      <article class="post">
+        <div class="post__thumbnail" style="width: 300px; height: 200px;">
+          <img src="./images/<?= $post['thumbnail'] ?>" >
+        </div>
+        <div class="post__info">
+          <?php // fetch category from categories using category_id
+          $category_id = $post['category_id'];
+          $category_query = "SELECT * FROM categories WHERE id=$category_id";
+          $category_result = mysqli_query($connection, $category_query);
+          $category = mysqli_fetch_assoc($category_result);
+          ?>
+          <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $post['category_id'] ?>" class="category__button"><?= $category['title'] ?></a>
+          <h2 class="post__title"><a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= $post['title'] ?></a></h2>
+          <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>">
+
+            <p class="post__body" style="min-height: 100px;">
+              <?= substr($post['body'], 0, 150) ?>...
+            </p>
+          </a>
+
+          <div class="post__author">
+            <?php
+            // Fetch author from users table using author id
+            $author_id = $post['author_id'];
+            $author_query = "SELECT * FROM users WHERE id=$author_id";
+            $author_result = mysqli_query($connection, $author_query);
+            $author = mysqli_fetch_assoc($author_result);
+            $author_firstname = $author['firstname'];
+            $author_lastname = $author['lastname'];
+            ?>
+            <div class="post__author-avatar">
+              <img src="./images/<?= $author['avatar'] ?>" alt="" />
+            </div>
+            <div class="post__author-info">
+              <h5>By: <?= "{$author_firstname} {$author_lastname}" ?></h5>
+              <small><?= date("M d, Y - H:i", strtotime($post['date_time'])) ?></small>
+            </div>
+          </div>
+        </div>
+      </article>
+    <?php endwhile; ?>
+  </div>
+</section>
+<!-- #endregion POSTS -->
+
+
+
+
+    <!--=====================================================================
+    ==========================END OF THE POSTS===============================
+  =================================================================== -->
+  <section class="category__buttons">
+    <div class="container category__buttons-container">
+        <?php 
+        $all_categories_query="SELECT * FROM categories ";
+        $all_categories_result=mysqli_query($connection,$all_categories_query);
+
+        ?>
+        <?php while ( $category=mysqli_fetch_assoc($all_categories_result) ) : ?>
+        <a href="<?=ROOT_URL?>category-posts.php?id=<?=$category['id']?>" class="category__button"><?=$category['title']?></a>
+        <?php endwhile?>
+    </div>
+  </section>
+  <!--=======================END OF CATEGORY ===================================-->
+<?php
+include './partials/footer.php';
+?>

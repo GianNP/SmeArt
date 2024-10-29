@@ -1,76 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beranda | SmeArt</title>
-    <!-- CSS -->
-     <link rel="stylesheet" href="../style.css">
-    <!-- Iconscout -->
-     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-     <!-- Poppins Font -->
-     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-</head>
-<body style="background: var(--color-primary-variant) ;">
+<?php
+include "partials/header.php";
+if(!isset($_SESSION['user_is_admin'])){
+    header("location: " . ROOT_URL . "logout.php");
+    //destroy all sessions and redirect user to login page
+    session_destroy();
+}
+//fetch categories from database
+$query = "SELECT * FROM categories ORDER BY title";
+$categories=mysqli_query($connection,$query)
 
-    <!-- Navbar -->
-    <nav>
-        <div class="container nav__container">
-            <div class="nav__logo">
-                <h1><a href="../index.php" style="color: azure;">SmeArt</a></h1>
+?>
+
+
+    <section class="dashboard">
+    <?php if(isset($_SESSION['add-category-success'])) : ?>  
+            <div class="alert__message success container">
+            <p>
+                <?= $_SESSION['add-category-success'];
+                unset($_SESSION['add-category-success']);
+                ?>
+            </p>
+            
             </div>
-            <ul class="nav__items">
-                <li><a href="../blog.php">Blog</a></li>
-                <li><a href="../about.php">About</a></li>
-                <li><a href="../services.php">Services</a></li>
-                <li><a href="../contact.php">Contact</a></li>
-                <!-- <li><a href="login.php">Login</a></li> -->
-                <li class="nav__profile">
-                    <div class="avatar">
-                        <img src="../img/assets/avatar0.jpg">
-                    </div>
-                    <ul>
-                        <li><a href="dashboard.php">Dashboard</a></li>
-                        <li><a href="logout.php">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <button id="open__nav-btn"><i class="uil uil-bars"></i></button>
-            <button id="close__nav-btn"><i class="uil uil-multiply"></i></button>
-        </div>
-    </nav>
-    <!-- End Navbar -->
-
-
-<section class="dashboard">
-    <div class="container dashboard_container">
-        <button id="show_sidebar-btn" class="sidebar_toggle"><i class="uil uil-angle-right-b"></i></button>
-        <button id="hide_sidebar-btn" class="sidebar_toggle"><i class="uil uil-angle-left-b"></i></button>
-        <aside>
-            <ul>
-                <li>
-                    <a style="color: white;" href="add-post.php" ><i class="uil uil-pen"></i><h5 style="color: white;">Add Post</h5></a>
-                </li>
-                <li>
-                    <a style="color: white;" href="dashboard.php" ><i class="uil uil-postcard"></i><h5 style="color: white;">Manage Post</h5></a>
-                </li>
-                <li>
-                    <a style="color: white;" href="add-user.php" ><i class="uil uil-user-plus"></i><h5 style="color: white;">Add User</h5></a>
-                </li>
-                <li>
-                    <a style="color: white;" href="manage-users.php" ><i class="uil uil-users-alt"></i><h5 style="color: white;">Manage User</h5></a>
-                </li>
-                <li>
-                    <a style="color: white;" href="add-category.php" ><i class="uil uil-edit"></i><h5 style="color: white;">Add Category</h5></a>
-                <li>
-                    <a style="color: white;" href="manage_categories.php" class="active"><i class="uil uil-list-ul"></i><h5 style="color: white;">Manage Categories</h5></a>
-                </li>
-            </ul>
-        </aside>
-        <main>
-            <h2>Manage Categories</h2>
-                <table style="color: white;">
+    <?php
+        elseif(isset($_SESSION['add-category'])): ?> 
+            <div class="alert__message error container">
+            <p>
+                <?= $_SESSION['add-category'];
+                unset($_SESSION['add-category']);
+                ?>
+            </p>
+            
+            </div>
+            <?php endif?>
+    <?php if(isset($_SESSION['edit-category-success'])) : ?>  
+            <div class="alert__message success container">
+            <p>
+                <?= $_SESSION['edit-category-success'];
+                unset($_SESSION['edit-category-success']);
+                ?>
+            </p>
+            
+            </div>
+    <?php
+        elseif(isset($_SESSION['edit-category'])): ?> 
+            <div class="alert__message error container">
+            <p>
+                <?= $_SESSION['edit-category'];
+                unset($_SESSION['edit-category']);
+                ?>
+            </p>
+            
+            </div>
+            <?php endif?>
+        <div class="container dashboard__container">
+    
+            <button id="show__sidebar-btn" class="sidebar__toggle"><i class="uil uil-angle-right-b"></i></button>
+            <button id="hide__sidebar-btn" class="sidebar__toggle"><i class="uil uil-angle-left-b"></i></button>
+    
+            <aside>
+                <ul>
+                    <li>
+                        <a href="<?= ROOT_URL ?>admin/add-post.php">
+                            <i class="uil uil-pen"></i>
+                            <h5>Add Post</h5>
+                        </a>
+                    </li>                
+                        
+                    <li>
+                        <a href="<?= ROOT_URL ?>admin/index.php">
+                        <i class="uil uil-postcard"></i>                            
+                        <h5>Manage Posts</h5>
+                        </a>
+                    </li>
+                    <?php  if(isset($_SESSION['user_is_admin'])) : ?>
+                    <li>
+                        <a href="<?= ROOT_URL ?>admin/add-user.php">
+                            <i class="uil uil-user-plus"></i> 
+                            <h5>Add User</h5>
+                        </a>
+                    </li>  
+    
+                    <li>
+                        <a href="<?= ROOT_URL ?>admin/manage-users.php">
+                            <i class="uil uil-users-alt"></i>
+                            <h5>Manage Users</h5>
+                        </a>
+                    </li>                    
+                    <li>
+                        <a href="<?= ROOT_URL ?>admin/add-category.php">
+                            <i class="uil uil-edit"></i>
+                            <h5>Add Category</h5>
+                        </a>
+                    </li>                    
+                    <li>
+                        <a href="<?= ROOT_URL ?>admin/manage-categories.php" class="active">
+                            <i class="uil uil-list-ul"></i>
+                            <h5>Manage Categories</h5>
+                        </a>
+                    </li>
+                    <?php endif ?>
+                </ul>
+            </aside>
+            <main>
+                <h2>Manage Categories</h2>
+                <?php if(mysqli_num_rows($categories)>0) : ?>
+                <table>
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -79,29 +114,27 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php while($category=mysqli_fetch_assoc($categories)) : ?>
                         <tr>
-                            <td>Travel</td>
-                            <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                            <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
+                            <td><?=$category['title']?></td>
+                            <td><a href="<?= ROOT_URL ?>admin/edit-category.php?id=<?=$category['id']?>" class="btn sm">Edit</a></td>
+                            <td><a href="<?= ROOT_URL ?>admin/delete-category.php?id=<?=$category['id']?>" class="btn sm danger">Delete</a></td>
                         </tr>
-                        <tr>
-                            <td>Wild Life</td>
-                            <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                            <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-                        </tr>
-                        <tr>
-                            <td>Music</td>
-                            <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                            <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-                        </tr>
+                        <?php endwhile ?>
                     </tbody>
+                <?php else : ?>
+                    <div class="alert__message error">
+                            No categories found
+                    </div>
+                <?php endif?>
                 </table>
-            </h2>
-        </main>
-    </div>
-</section>
+            </main>
+        </div>
+    </section>
+    
+    
+
 
 <?php
-include '../partials/footer.php';
+include "../partials/footer.php";
 ?>
-<script src="../js/main.js"></script>

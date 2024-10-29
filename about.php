@@ -1,11 +1,12 @@
-<?php
-include 'partials/header.php';
+<?php 
+include 'partials/header.php'
 ?>
 
-    <sesction class="empty_page">
-        <h1>About Page</h1>
-    </sesction>
+
+<section class="empty__page">
+    <h1>About Page</h1>
+</section>
 
 <?php
-include 'partials/footer.php';
+include './partials/footer.php';
 ?>
