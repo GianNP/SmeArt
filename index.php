@@ -127,5 +127,5 @@ $posts=mysqli_query($connection,$query);
   </section>
   <!--=======================END OF CATEGORY ===================================-->
 <?php
-include './partials/footer.php';
+include 'partials/footer.php';
 ?>
