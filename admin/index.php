@@ -1,5 +1,5 @@
 <?php
-include "partials/header.php";
+include "../admin/partials/header.php";
 
 // fetch curretn user-id from session
 $current_user_id=$_SESSION['user-id'];

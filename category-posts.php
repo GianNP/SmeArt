@@ -1,5 +1,5 @@
 <?php 
-include 'partials/header.php';
+include './partials/header.php';
 
 //fetch posts if id is set
 if(isset($_GET['id'])){

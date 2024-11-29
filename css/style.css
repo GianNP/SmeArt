@@ -546,7 +546,7 @@ footer ul a:hover {
 .category__title {
   height: 11rem;
   margin-top: 4.5rem;
-  background: var(--color-gray-900);
+  background: var(--color-primary-variant);
   display: grid;
   place-items: center;
 }
@@ -558,6 +558,22 @@ footer ul a:hover {
   text-align: center;
   display: grid;
   place-content: center;
+
+  .about__content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Menambahkan ini untuk memusatkan teks */
+}
+
+.about__content p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    line-height: 1.8;
+}
 }
 /* END EMPTY PAGES */
 
