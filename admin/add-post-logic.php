@@ -6,7 +6,7 @@ if(isset($_POST['submit'])){
     $title =filter_var($_POST['title'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $body =filter_var($_POST['body'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $category_id =filter_var($_POST['category_id'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $is_featured =filter_var($_POST['is_featured'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $is_featured = isset($_POST['is_featured']) ? filter_var($_POST['is_featured'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : 0;
     $thumbnail =$_FILES['thumbnail'];
 
     //set featured set to zero if unchecked
