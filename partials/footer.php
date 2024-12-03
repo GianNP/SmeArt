@@ -10,13 +10,14 @@
         <article>
             <h4>Categotries</h4>
             <ul>
-                <li><a href="">Wild Life</a></li>
-                <li><a href="">Music</a></li>
-                <li><a href="">Movies</a></li>
-                <li><a href="">Travel</a></li>
-                <li><a href="">Science & Technology</a></li>
-                <li><a href="">Food</a></li>
-            
+            <?php 
+        $all_categories_query="SELECT * FROM categories ";
+        $all_categories_result=mysqli_query($connection,$all_categories_query);
+
+        ?>
+        <?php while ( $category=mysqli_fetch_assoc($all_categories_result) ) : ?>
+                <li><a href="<?=ROOT_URL?>category-posts.php?id=<?=$category['id']?>"><?=$category['title']?></a></li>
+        <?php endwhile?>
             </ul>
         </article>
         <article>
@@ -45,11 +46,11 @@
         <article>
             <h4>PermaLinks</h4>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Services</a></li>
-                <li><a href="">Contact</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="blog.php">Blog</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="services.php">Services</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 
             </ul>
         </article>
